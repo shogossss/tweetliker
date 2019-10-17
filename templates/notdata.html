@@ -1,0 +1,32 @@
+<!-- chart -->
+  <div class="row">
+    <div class="col-md-12">
+      <canvas id="chart"></canvas>
+    </div>
+  </div>
+<div class="row">
+  <!-- プロフィール -->
+  <div class="col-md-1">
+  {% if profile %}
+    <div class="white-container">
+      <div>
+        <img src="{{profile.image}}" width="100px">
+        <a href="https://twitter.com/{{profile.user_id}}">@{{profile.user_id}}</a>
+      </div>
+      <div>{{profile.description}}</div>
+    </div>
+  {% endif %}
+  {% if profile %}
+    <div class="white-container">
+      <div>
+        {% for index, row in grouped_df.iterrows() %}
+        <div>
+            {{index}}
+            <i class="fas fa-retweet"></i>  {{row["retweets"]}}
+            <i class="far fa-heart"></i>  {{row["fav"]}}
+        </div>
+        {% endfor %}
+    </div>
+  {% endif %}
+  </div>
+  </div>

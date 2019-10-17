@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+      <title>{{ title }}</title>
+    {% else %}
+      <title>Bootstrap 101 Template</title>
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}" />
+</head>
+<body>
+  <p class="lead">
+    {% if message %}
+      {{ message }}
+    {% endif %}
+  </p>
+    <form action="/tweet" method="post">
+        <h1>API認証</h1>
+        <input type="text" name="a" placeholder="CONSUMER_KEY" required/>
+        <input type="text" name="b" placeholder="CONSUMER_SECRET" required/>
+        <input type="text" name="c" placeholder="ACCESS_TOKEN" required/>
+        <input type="text" name="d" placeholder="ACCESS_SECRET" required/>
+        <input type="number" name="age" placeholder="年齢" required/>
+        <button>API確認</button>
+    </form>
+
+</body>
+</html>
