@@ -15,14 +15,18 @@
       {{ message }}
     {% endif %}
   </p>
-    <form action="/tweet" method="post">
+    <form class="form-horizontal" action="/tweet" method="post">
         <h1>API認証</h1>
+        <div class="form-group">
         <input type="text" name="a" placeholder="CONSUMER_KEY" required/>
         <input type="text" name="b" placeholder="CONSUMER_SECRET" required/>
         <input type="text" name="c" placeholder="ACCESS_TOKEN" required/>
         <input type="text" name="d" placeholder="ACCESS_SECRET" required/>
+      </div>
+      <div class="form-group">
         <input type="number" name="age" placeholder="年齢" required/>
         <button>API確認</button>
+      </div>
     </form>
 
 </body>
