@@ -5,22 +5,21 @@ from flask import Flask, render_template, request, logging, Response, redirect, 
 from requests_oauthlib import OAuth1Session
 import config,json
 
-# 各種ツイッターのキーをセット
-CONSUMER_KEY = config.CONSUMER_KEY
-CONSUMER_SECRET = config.CONSUMER_SECRET
-ACCESS_TOKEN = config.ACCESS_TOKEN
-ACCESS_SECRET = config.ACCESS_SECRET
-
-#Tweepy
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
-
-#APIインスタンスを作成
-api = tweepy.API(auth)
+# # 各種ツイッターのキーをセット
+# CONSUMER_KEY = config.CONSUMER_KEY
+# CONSUMER_SECRET = config.CONSUMER_SECRET
+# ACCESS_TOKEN = config.ACCESS_TOKEN
+# ACCESS_SECRET = config.ACCESS_SECRET
+#
+# #Tweepy
+# auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+# auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
+#
+# #APIインスタンスを作成
+# api = tweepy.API(auth)
 
 # Flask の起動
 app = Flask(__name__)
-
 # Viewの処理
 columns = [
    "tweet_id",
@@ -54,13 +53,15 @@ def tweet():
         CONSUMER_SECRET = request.form['b']
         ACCESS_TOKEN = request.form['c']
         ACCESS_SECRET = request.form['d']
-        # #Tweepy
-        # auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        # auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
-        # #グローバル変数
-            # global api
-        # #APIインスタンスを作成
-        # api = tweepy.API(auth)
+        #Tweepy
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
+
+        #グローバル変数
+        global api
+        #APIインスタンスを作成
+        api = tweepy.API(auth)
+
     # index.html をレンダリングする
         return render_template('index.html')
     else:
