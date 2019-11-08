@@ -74,24 +74,34 @@ def index():
        cnt = int(request.form['count'])
        button = request.form['button']
        posts = []
-       if button == "like":
-           posts = like_tweepy(query,cnt,api,posts)
-       if button == "retweet":
-           tweets_df = retweet_tweepy(query,cnt,api,posts)
-       if button == "follow":
-           posts = follow_tweepy(query,cnt,api,posts)
-       # grouped_df = get_grouped_df(tweets_df)
-       # sorted_df = get_sorted_df(tweets_df)
-       # 送られてきたものを返すしなきゃ返されない
-       return render_template(
-           'index.html',
-           query = query,
-           count = cnt,
-           # profile=get_profile(user_id),
-           posts = posts
-           # grouped_df = grouped_df,
-           # sorted_df = sorted_df
-           )
+       try:
+           if button == "like":
+               posts = like_tweepy(query,cnt,api,posts)
+           if button == "retweet":
+               tweets_df = retweet_tweepy(query,cnt,api,posts)
+           if button == "follow":
+               posts = follow_tweepy(query,cnt,api,posts)
+           # grouped_df = get_grouped_df(tweets_df)
+           # sorted_df = get_sorted_df(tweets_df)
+           # 送られてきたものを返すしなきゃ返されない
+           return render_template(
+               'index.html',
+               query = query,
+               count = cnt,
+               # profile=get_profile(user_id),
+               posts = posts
+               # grouped_df = grouped_df,
+               # sorted_df = sorted_df
+               )
+       except:
+            messages = "APIが違います"
+            title = "APIエラー"
+            return render_template(
+            'check.html',
+            message = messages,
+            title = title
+            )
+
    else:
        return render_template('index.html')
 
@@ -111,6 +121,7 @@ def like_tweepy(query,cnt,api,posts):
                post["select"] = "いいね"
                posts.append(post)
                time.sleep(1)
+
 
         except Exception as e:
             print(e)
