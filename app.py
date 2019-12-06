@@ -106,25 +106,29 @@ def index():
        return render_template('index.html')
 
 def like_tweepy(query,cnt,api,posts):
-    search_results = api.search(q=query, count=cnt)
-    for tweet in search_results:
-        post = {}
-        try:
-            if not "RT @" in tweet.text: #3
-               tweet_id = tweet.id
-               api.create_favorite(tweet_id) #ファボする
-               post["created_at"] = tweet.created_at
-               post["user_id"] = tweet.user.screen_name
-               post["text"] = tweet.text.replace('\n','')
-               post["fav"] = tweet.favorite_count
-               post["retweet"] = tweet.retweet_count
-               post["select"] = "いいね"
-               posts.append(post)
-               time.sleep(1)
+    ii=0
+    while ii<cnt:
+        count1 = 1
+        search_results = api.search(q=query, count=count1)
+        for tweet in search_results:
+            post = {}
+            try:
+                if not "RT @" in tweet.text: #3
+                   tweet_id = tweet.id
+                   api.create_favorite(tweet_id) #ファボする
+                   post["created_at"] = tweet.created_at
+                   post["user_id"] = tweet.user.screen_name
+                   post["text"] = tweet.text.replace('\n','')
+                   post["fav"] = tweet.favorite_count
+                   post["retweet"] = tweet.retweet_count
+                   post["select"] = "いいね"
+                   posts.append(post)
+                   time.sleep(2)
 
 
-        except Exception as e:
-            print(e)
+            except Exception as e:
+                print(e)
+        ii += 1
 
     return posts
 
