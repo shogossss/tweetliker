@@ -47,19 +47,17 @@
    <div class="row">
      <div class="col-md-12">
        <h1 class="hh1">Tweetliker</h1>
-        <p class="lead">
-          {% if message %}
-            {{ message }}
-          {% endif %}
-        </p>
+        <p class="lead">APIの再入力をお願いします</p>
           <form class="form-horizontal" action="/tweet" method="post">
               <h1>API認証</h1>
+            {% if CONSUMER_KEY, CONSUMER_SECRET,ACCESS_TOKEN,ACCESS_SECRET%}
               <div class="form-group">
-              <input type="text" name="a" placeholder="CONSUMER_KEY" required/>
-              <input type="text" name="b" placeholder="CONSUMER_SECRET" required/>
-              <input type="text" name="c" placeholder="ACCESS_TOKEN" required/>
-              <input type="text" name="d" placeholder="ACCESS_SECRET" required/>
-            </div>
+              <input type="text" name="a" value={{CONSUMER_KEY}} required/>
+              <input type="text" name="b" value={{CONSUMER_SECRET}} required/>
+              <input type="text" name="c" value={{ACCESS_TOKEN}} required/>
+              <input type="text" name="d" value={{ACCESS_SECRET}} required/>
+              </div>
+            {% endif %}
             <div class="form-group">
               <button type="submit" class="btn btn-default" name="button" value="api" id=1>API認証</button>
             </div>

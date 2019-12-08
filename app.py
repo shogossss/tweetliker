@@ -46,24 +46,37 @@ def check():
     return render_template('check.html',
                            message=message, title=title)
 
+
 @app.route('/tweet', methods = ["GET" , "POST"])
 def tweet():
     if request.method == 'POST':
-        CONSUMER_KEY  = request.form['a']
-        CONSUMER_SECRET = request.form['b']
-        ACCESS_TOKEN = request.form['c']
-        ACCESS_SECRET = request.form['d']
-        #Tweepy
-        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
+        try:
+            global CONSUMER_KEY,CONSUMER_SECRET,ACCESS_TOKEN,ACCESS_SECRET
+            CONSUMER_KEY  = request.form['a']
+            CONSUMER_SECRET = request.form['b']
+            ACCESS_TOKEN = request.form['c']
+            ACCESS_SECRET = request.form['d']
+            #Tweepy
+            auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+            auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 
-        #グローバル変数
-        global api
-        #APIインスタンスを作成
-        api = tweepy.API(auth)
+            #グローバル変数
+            global api
+            #APIインスタンスを作成
+            api = tweepy.API(auth)
 
-    # index.html をレンダリングする
-        return render_template('index.html')
+        # index.html をレンダリングする
+            return render_template('index.html')
+
+        except Exception as e:
+            print(e)
+            messages = "適切な文字を入力してください"
+            title = "API認証"
+            return render_template(
+            'check.html',
+            message = messages,
+            title = title
+            )
     else:
         return render_template('index.html')
 
@@ -97,9 +110,13 @@ def index():
             messages = "APIが違います"
             title = "APIエラー"
             return render_template(
-            'check.html',
+            'recheck.html',
             message = messages,
-            title = title
+            title = title,
+            CONSUMER_KEY = CONSUMER_KEY,
+            CONSUMER_SECRET = CONSUMER_SECRET,
+            ACCESS_TOKEN = ACCESS_TOKEN,
+            ACCESS_SECRET = ACCESS_SECRET
             )
 
    else:

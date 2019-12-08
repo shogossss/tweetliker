@@ -41,6 +41,7 @@ div{
    <div class="col-md-12">
     <h1 class="hh1">Tweetliker</a></h1>
     <p>調べたい言葉を入れると関連するツイートに三つのアクションをする。</p>
+    <p>※カウント数はその時点で可能な数のツイートに対してのみ適応されます</p>
     <!-- コードを追加 返信が来たかどうかの確認-->
     {% if query,count %}
     <p>{{query,count}}</p>
@@ -51,12 +52,12 @@ div{
           <label class="sr-only" for="query"></label>
           <div class="input-group">
              <span class="input-group-addon">キーワード</span>
-             <input id=query name="query" placeholder="ここに興味のある文を入力してください。" type="text" class="form-control" required/>
+             <input id=query name="query" placeholder="ここに興味のあるキーワードを入力してください。" type="text" class="form-control" required/>
           </div>
         </div>
         <div class="form-group">
           <div class="input-group">
-             <span class="input-group-addon">何回そのアクションを行う？</span>
+             <span class="input-group-addon">最大何回そのアクションを行う？</span>
              <input id=count name="count" placeholder="何個" type="number" class="form-control"required/>
           </div>
        </div>
